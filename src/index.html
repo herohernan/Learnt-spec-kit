@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photo Albums</title>
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/components/album-card.css" />
+    <link rel="stylesheet" href="./css/components/drag-drop.css" />
+  </head>
+  <body>
+    <header class="app-header" role="banner">
+      <h1 class="app-title">Photo Albums</h1>
+      <button
+        id="btn-create-album"
+        class="btn btn-primary"
+        aria-haspopup="dialog"
+        aria-controls="album-form-dialog"
+      >
+        + Create album
+      </button>
+    </header>
+
+    <main id="main-content" role="main">
+      <div
+        id="album-list-region"
+        aria-live="polite"
+        aria-label="Album collection"
+      >
+        <!-- AlbumGrid renders here -->
+      </div>
+    </main>
+
+    <!-- Create Album Modal -->
+    <dialog
+      id="album-form-dialog"
+      aria-labelledby="dialog-title"
+      aria-modal="true"
+    >
+      <!-- AlbumForm renders here -->
+    </dialog>
+
+    <div
+      id="toast-region"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
