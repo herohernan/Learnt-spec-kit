@@ -1,0 +1,17 @@
+/*
+ * Drag-and-drop insertion-line indicators.
+ * Lines appear ABOVE or BELOW the target card — never as an overlay —
+ * making nesting visually impossible (UX-004, FR-006).
+ */
+
+[data-album-id].drag-over-before {
+  border-top: 3px solid var(--color-primary);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+[data-album-id].drag-over-after {
+  border-bottom: 3px solid var(--color-primary);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}

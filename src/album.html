@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Album — Photo Albums</title>
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/album.css" />
+    <link rel="stylesheet" href="./css/components/photo-tile.css" />
+  </head>
+  <body>
+    <header class="app-header" role="banner">
+      <a href="./index.html" class="back-link" aria-label="Back to all albums"
+        >← Albums</a
+      >
+      <h1 id="album-title" class="album-page-title">Loading…</h1>
+      <button id="btn-add-photos" class="btn btn-primary">+ Add photos</button>
+    </header>
+
+    <main id="main-content" role="main">
+      <p id="album-date-display" class="album-date"></p>
+      <div
+        id="photo-grid-region"
+        aria-live="polite"
+        aria-label="Photos in album"
+      >
+        <!-- PhotoGrid renders here -->
+      </div>
+    </main>
+
+    <div
+      id="toast-region"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+
+    <script type="module" src="./js/album-page.js"></script>
+  </body>
+</html>

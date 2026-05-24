@@ -1,0 +1,106 @@
+.album-card {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  cursor: pointer;
+  transition: box-shadow 0.15s, transform 0.1s, border-color 0.1s;
+  user-select: none;
+  outline: none;
+}
+
+.album-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.album-card:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.album-card.dragging {
+  opacity: 0.45;
+  transform: scale(0.97);
+}
+
+.album-card__drag-handle {
+  position: absolute;
+  top: var(--space-sm);
+  right: 40px;
+  color: var(--color-text-muted);
+  opacity: 0.35;
+  transition: opacity 0.15s;
+  cursor: grab;
+  padding: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.album-card:hover .album-card__drag-handle,
+.album-card:focus-within .album-card__drag-handle {
+  opacity: 1;
+}
+
+.album-card__drag-handle:active {
+  cursor: grabbing;
+}
+
+.album-card__body {
+  padding-right: 60px;
+  padding-top: var(--space-xs);
+}
+
+.album-card__title {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.album-card__date {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.album-card__actions {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.album-card:hover .album-card__actions,
+.album-card:focus-within .album-card__actions {
+  opacity: 1;
+}
+
+.btn-icon {
+  padding: 2px var(--space-xs);
+  font-size: 0.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  line-height: 1.4;
+  min-width: 24px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btn-icon:hover {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+.btn-icon:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
