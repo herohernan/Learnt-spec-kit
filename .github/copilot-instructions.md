@@ -2,5 +2,6 @@
 For governing principles and non-negotiable quality expectations, read
 `.specify/memory/constitution.md` first.
 For additional context about technologies to be used, project structure,
-shell commands, and other important information, read the current plan
+shell commands, and other important information, read the current plan at
+`specs/001-organize-photo-albums/plan.md`.
 <!-- SPECKIT END -->
