@@ -1,0 +1,11 @@
+import { defineConfig } from 'vitest/config';
+
+export default defineConfig({
+  test: {
+    environment: 'jsdom',
+    include: ['tests/unit/**/*.test.js', 'tests/integration/**/*.test.js'],
+    exclude: ['tests/e2e/**'],
+    setupFiles: ['tests/setup.js'],
+    testTimeout: 15000,
+  },
+});
