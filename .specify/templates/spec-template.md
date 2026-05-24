@@ -98,6 +98,33 @@
 - **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
 - **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
 
+### Quality & Testing Requirements
+
+- **QT-001**: Define the code quality checks that MUST pass for this feature
+  (linting, formatting, static analysis, review gates).
+- **QT-002**: Define the automated tests required to prove the feature is done,
+  including unit, integration, contract, and regression coverage as applicable.
+- **QT-003**: Record any manual validation that supplements automation and state
+  why automation alone is insufficient.
+
+### User Experience Consistency Requirements
+
+- **UX-001**: Identify the existing UX patterns, terminology, and interaction
+  conventions this feature MUST reuse.
+- **UX-002**: Specify expected success, loading, empty, and error states for
+  each affected user journey.
+- **UX-003**: Capture accessibility or content constraints that reviewers MUST
+  verify before release.
+
+### Performance Requirements
+
+- **PR-001**: Define measurable performance targets for each critical user
+  journey affected by this feature.
+- **PR-002**: Define how performance will be measured, including tooling,
+  baseline, and acceptable regression thresholds.
+- **PR-003**: Identify any capacity, responsiveness, startup, rendering, or
+  resource-usage constraints that must remain within budget.
+
 ### Key Entities *(include if feature involves data)*
 
 - **[Entity 1]**: [What it represents, key attributes without implementation]
@@ -116,6 +143,8 @@
 - **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
 - **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
 - **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
+- **SC-005**: [Quality metric, e.g., "All new behavior ships with required automated coverage and zero critical lint or static analysis findings"]
+- **SC-006**: [Performance metric, e.g., "Critical flow remains within its approved response-time or render-time budget"]
 
 ## Assumptions
 

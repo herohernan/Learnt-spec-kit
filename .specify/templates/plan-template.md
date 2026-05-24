@@ -26,9 +26,13 @@
 
 **Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]
 
+**Code Quality Gates**: [linting, formatting, static analysis, review rules]
+
 **Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
 
 **Project Type**: [e.g., library/cli/web-service/mobile-app/compiler/desktop-app or NEEDS CLARIFICATION]
+
+**UX Consistency Reference**: [existing patterns, design system, copy guidance, or NEEDS CLARIFICATION]
 
 **Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]
 
@@ -40,7 +44,18 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- **Code Quality**: Identify the linting, formatting, static analysis, and code
+  review checks that apply to this feature. Document any requested exceptions.
+- **Testing**: List the unit, integration, contract, and regression tests that
+  will prove the change is done. Confirm tests will fail before implementation
+  is accepted.
+- **User Experience Consistency**: Reference the existing UX patterns, content,
+  accessibility expectations, and state handling (loading, empty, error,
+  success) that this feature must preserve.
+- **Performance**: Define measurable budgets, baselines, instrumentation, and
+  regression thresholds for critical user journeys.
+- **Exception Handling**: Any unmet constitutional gate MUST be recorded in
+  Complexity Tracking with explicit justification and reviewer approval.
 
 ## Project Structure
 
