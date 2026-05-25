@@ -5,7 +5,7 @@
 /**
  * Create a photo tile element.
  * Thumbnail injection is deferred to PhotoGrid via IntersectionObserver.
- * @param {{ id: number, file_name: string }} photo
+ * @param {{ id: number, file_name: string, thumbnail_data_url?: string|null }} photo
  * @param {File|null} file - resolved File (null if file is unavailable)
  * @returns {HTMLElement}
  */
@@ -15,6 +15,15 @@ export function renderPhotoTile(photo, file) {
   tile.setAttribute('data-photo-id', String(photo.id));
   tile.setAttribute('role', 'img');
   tile.setAttribute('aria-label', photo.file_name);
+
+  if (photo.thumbnail_data_url) {
+    const img = document.createElement('img');
+    img.src = photo.thumbnail_data_url;
+    img.alt = photo.file_name;
+    img.className = 'photo-tile__img';
+    tile.appendChild(img);
+    return tile;
+  }
 
   if (!file) {
     tile.classList.add('photo-tile--unavailable');

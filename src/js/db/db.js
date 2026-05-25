@@ -5,9 +5,10 @@
  *   import { initDB, persistDB } from './db.js';
  *   const db = await initDB();
  */
+import initSqlJs from 'sql.js/dist/sql-wasm.js';
 
 const DB_FILE_NAME = 'photo-albums.db';
-const CURRENT_SCHEMA_VERSION = 1;
+const CURRENT_SCHEMA_VERSION = 2;
 
 /** @type {import('sql.js').Database|null} */
 let _db = null;
@@ -111,6 +112,7 @@ function migrateDB(db) {
         id            INTEGER PRIMARY KEY AUTOINCREMENT,
         album_id      INTEGER NOT NULL REFERENCES albums(id) ON DELETE CASCADE,
         file_name     TEXT    NOT NULL,
+        thumbnail_data_url TEXT,
         display_order INTEGER NOT NULL DEFAULT 0,
         created_at    TEXT    NOT NULL DEFAULT (datetime('now'))
       );
@@ -119,9 +121,11 @@ function migrateDB(db) {
       CREATE INDEX IF NOT EXISTS idx_albums_album_date    ON albums(album_date);
       CREATE INDEX IF NOT EXISTS idx_photos_album_id      ON photos(album_id, display_order);
     `);
-    db.run(`PRAGMA user_version = ${CURRENT_SCHEMA_VERSION}`);
+  } else if (currentVersion < 2) {
+    db.run('ALTER TABLE photos ADD COLUMN thumbnail_data_url TEXT');
   }
-  // Future migrations: if (currentVersion < 2) { … }
+  db.run(`PRAGMA user_version = ${CURRENT_SCHEMA_VERSION}`);
+  // Future migrations: if (currentVersion < 3) { … }
 }
 
 /**
@@ -132,7 +136,6 @@ function migrateDB(db) {
 export async function initDB() {
   if (_db) return _db;
 
-  const { default: initSqlJs } = await import('sql.js');
   const SQL = await initSqlJs({ locateFile: () => '/sql-wasm.wasm' });
 
   let data = null;

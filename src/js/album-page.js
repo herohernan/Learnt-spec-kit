@@ -8,6 +8,7 @@ import { renderPhotoGrid } from './components/PhotoGrid.js';
 import { pickFiles } from './utils/file-access.js';
 import { formatAlbumDate } from './utils/date-utils.js';
 import { showToast } from './components/Toast.js';
+import { generateThumbnail } from './utils/thumbnail.js';
 
 const photoGridRegion = /** @type {HTMLElement} */ (document.getElementById('photo-grid-region'));
 const albumTitleEl = /** @type {HTMLElement} */ (document.getElementById('album-title'));
@@ -45,7 +46,13 @@ async function handleAddPhotos() {
 
   for (const file of files) {
     _fileMap.set(file.name, file);
-    addPhoto(_db, { albumId: _albumId, fileName: file.name, displayOrder: order++ });
+    const thumbnailDataUrl = await generateThumbnail(file);
+    addPhoto(_db, {
+      albumId: _albumId,
+      fileName: file.name,
+      displayOrder: order++,
+      thumbnailDataUrl,
+    });
   }
 
   await persistDB(_db);

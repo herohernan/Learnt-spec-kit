@@ -9,6 +9,7 @@ import { renderAlbumGrid } from './components/AlbumGrid.js';
 import { renderAlbumForm } from './components/AlbumForm.js';
 import { attachDragDrop } from './components/DragDrop.js';
 import { showToast } from './components/Toast.js';
+import { generateThumbnail } from './utils/thumbnail.js';
 
 const container = /** @type {HTMLElement} */ (document.getElementById('album-list-region'));
 const dialog = /** @type {HTMLDialogElement} */ (document.getElementById('album-form-dialog'));
@@ -60,9 +61,15 @@ function wireReorder() {
  */
 async function handleCreateAlbum({ title, albumDate, files }) {
   const albumId = createAlbum(_db, { title, albumDate });
-  files.forEach((file, i) => {
-    addPhoto(_db, { albumId, fileName: file.name, displayOrder: i });
-  });
+  for (const [i, file] of files.entries()) {
+    const thumbnailDataUrl = await generateThumbnail(file);
+    addPhoto(_db, {
+      albumId,
+      fileName: file.name,
+      displayOrder: i,
+      thumbnailDataUrl,
+    });
+  }
   await persistDB(_db);
   await loadAndRender();
   showToast(`Album “${title}” created`);

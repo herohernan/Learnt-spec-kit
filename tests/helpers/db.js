@@ -29,6 +29,7 @@ export async function createTestDb() {
       id            INTEGER PRIMARY KEY AUTOINCREMENT,
       album_id      INTEGER NOT NULL REFERENCES albums(id) ON DELETE CASCADE,
       file_name     TEXT    NOT NULL,
+      thumbnail_data_url TEXT,
       display_order INTEGER NOT NULL DEFAULT 0,
       created_at    TEXT    NOT NULL DEFAULT (datetime('now'))
     );
@@ -38,6 +39,6 @@ export async function createTestDb() {
     CREATE INDEX IF NOT EXISTS idx_photos_album_id      ON photos(album_id, display_order);
   `);
 
-  db.run('PRAGMA user_version = 1');
+  db.run('PRAGMA user_version = 2');
   return db;
 }

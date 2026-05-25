@@ -26,6 +26,17 @@ describe('photos DAO', () => {
     expect(photos[1].file_name).toBe('b.jpg');
   });
 
+  it('stores a persisted thumbnail preview when provided', () => {
+    addPhoto(db, {
+      albumId,
+      fileName: 'preview.jpg',
+      displayOrder: 0,
+      thumbnailDataUrl: 'data:image/webp;base64,abc123',
+    });
+    const photos = listPhotos(db, albumId);
+    expect(photos[0].thumbnail_data_url).toBe('data:image/webp;base64,abc123');
+  });
+
   it('removes a photo by id', () => {
     const id = addPhoto(db, { albumId, fileName: 'x.jpg', displayOrder: 0 });
     removePhoto(db, id);

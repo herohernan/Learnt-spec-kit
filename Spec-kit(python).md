@@ -77,5 +77,28 @@ specify init --here
 /speckit.tasks
 
 # Execute implementation
-/speckit.tasks
+/speckit.implement
+# Note: the implementation is created in a new branch to create a PR. Ex: 001-organize-photo-albums
+```
+
+## Run the project
+
+The agent provide the information about how to run the project. In my case the steps to run correctly was
+
+```sh
+# Change the branch to the new feature
+git fetch origin
+git checkout 001-organize-photo-albums
+npm install
+npm run dev
+
+# Download and install the latest node.js version
+# https://nodejs.org 
+node --version # In this case: v24.16.0
+
+# Run the project 
+npm install
+npm run dev
+
+# Note: In this point we need to check, verify, implement improvements and try to run again until the result is good enough
 ```

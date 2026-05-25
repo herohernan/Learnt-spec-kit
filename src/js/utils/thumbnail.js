@@ -2,6 +2,8 @@
  * thumbnail.js — Canvas-based thumbnail generation with Web Worker offload.
  * Memoises results by file identity key to avoid redundant regeneration.
  */
+// Vite-native worker import — bundled and served correctly in dev and prod
+import ThumbnailWorker from '../../workers/thumbnail.worker.js?worker';
 
 /** @type {Map<string, string>} */
 const _cache = new Map();
@@ -39,10 +41,7 @@ export function calcScaledSize(width, height, maxSize) {
 /** Get (or lazily create) the thumbnail Web Worker. */
 function getWorker() {
   if (!_worker) {
-    _worker = new Worker(
-      new URL('../workers/thumbnail.worker.js', import.meta.url),
-      { type: 'module' }
-    );
+    _worker = new ThumbnailWorker();
     _worker.addEventListener('message', ({ data }) => {
       const { key, dataUrl, error } = data;
       const callbacks = _pending.get(key) ?? [];

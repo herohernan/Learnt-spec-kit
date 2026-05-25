@@ -113,7 +113,9 @@ back to a hidden `<input type="file">` element. The selected `File` objects
 are held in memory for the current session only.
 
 Thumbnails are generated on-the-fly using an off-screen Canvas in a Web
-Worker and are **not** persisted anywhere.
+Worker. A thumbnail preview is persisted with the photo metadata so albums can
+still render tiles after navigation or reload, even though the original file
+handle is not retained.
 
 ---
 
@@ -197,6 +199,6 @@ export default {
 | Problem | Solution |
 |---|---|
 | `SharedArrayBuffer is not defined` | Ensure COOP/COEP headers are set (see `vite.config.js`); use HTTPS or localhost only |
-| Photos appear broken after reload | Session file handles are not persisted in v1; re-add photos after reopening the app |
+| Photos appear broken after reload | Clear old `photo-albums.db` data created before thumbnail persistence was added, then re-add the photos |
 | OPFS not available warning | Use Chrome 102+ or Firefox 111+ in a secure context (HTTPS or localhost) |
 | sql.js WASM 404 | Confirm `public/sql-wasm.wasm` exists; re-run `cp node_modules/sql.js/dist/sql-wasm.wasm public/` |

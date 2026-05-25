@@ -7,6 +7,7 @@
  * @property {number} id
  * @property {number} album_id
  * @property {string} file_name
+ * @property {string|null} thumbnail_data_url
  * @property {number} display_order
  * @property {string} created_at
  */
@@ -19,15 +20,15 @@ function rowToPhoto(cols, row) {
 /**
  * Add a photo to an album.
  * @param {import('sql.js').Database} db
- * @param {{ albumId: number, fileName: string, displayOrder: number }} params
+ * @param {{ albumId: number, fileName: string, displayOrder: number, thumbnailDataUrl?: string|null }} params
  * @returns {number} new photo id
  */
-export function addPhoto(db, { albumId, fileName, displayOrder }) {
+export function addPhoto(db, { albumId, fileName, displayOrder, thumbnailDataUrl = null }) {
   if (!fileName) throw new Error('File name is required');
   const now = new Date().toISOString();
   db.run(
-    'INSERT INTO photos (album_id, file_name, display_order, created_at) VALUES (?, ?, ?, ?)',
-    [albumId, fileName, displayOrder, now]
+    'INSERT INTO photos (album_id, file_name, thumbnail_data_url, display_order, created_at) VALUES (?, ?, ?, ?, ?)',
+    [albumId, fileName, thumbnailDataUrl, displayOrder, now]
   );
   const idResult = db.exec('SELECT last_insert_rowid()');
   return /** @type {number} */ (idResult[0].values[0][0]);
@@ -41,7 +42,7 @@ export function addPhoto(db, { albumId, fileName, displayOrder }) {
  */
 export function listPhotos(db, albumId) {
   const result = db.exec(
-    'SELECT id, album_id, file_name, display_order, created_at FROM photos WHERE album_id = ? ORDER BY display_order ASC',
+    'SELECT id, album_id, file_name, thumbnail_data_url, display_order, created_at FROM photos WHERE album_id = ? ORDER BY display_order ASC',
     [albumId]
   );
   if (!result.length) return [];

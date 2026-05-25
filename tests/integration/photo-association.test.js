@@ -21,6 +21,18 @@ describe('photo association (integration)', () => {
     expect(photos.map((p) => p.file_name)).toEqual(['a.jpg', 'b.jpg', 'c.jpg']);
   });
 
+  it('preserves thumbnail previews with the stored photo metadata', () => {
+    addPhoto(db, {
+      albumId,
+      fileName: 'thumb.jpg',
+      displayOrder: 0,
+      thumbnailDataUrl: 'data:image/png;base64,preview',
+    });
+
+    const photos = listPhotos(db, albumId);
+    expect(photos[0].thumbnail_data_url).toBe('data:image/png;base64,preview');
+  });
+
   it('photos are scoped to their album — other album gets empty list', () => {
     const other = createAlbum(db, { title: 'Other', albumDate: '2024-07-01' });
     addPhoto(db, { albumId, fileName: 'mine.jpg', displayOrder: 0 });
